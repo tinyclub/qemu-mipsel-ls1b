@@ -1,0 +1,42 @@
+From b89f930f8746c731d577d9f5875db8c9e98f549f Mon Sep 17 00:00:00 2001
+From: Wu Zhangjin <wuzhangjin@gmail.com>
+Date: Fri, 19 Jul 2019 02:21:07 -0700
+Subject: [PATCH 1/2] ls1b: add zboot debug support
+
+Signed-off-by: Wu Zhangjin <wuzhangjin@gmail.com>
+---
+ arch/mips/Kconfig                      | 1 +
+ arch/mips/boot/compressed/uart-16550.c | 5 +++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 70d3200..af25c6d 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -436,6 +436,7 @@ config LASAT
+ config MACH_LOONGSON32
+ 	bool "Loongson-1 family of machines"
+ 	select SYS_SUPPORTS_ZBOOT
++	select SYS_SUPPORTS_ZBOOT_UART16550
+ 	help
+ 	  This enables support for the Loongson-1 family of machines.
+ 
+diff --git a/arch/mips/boot/compressed/uart-16550.c b/arch/mips/boot/compressed/uart-16550.c
+index aee8d7b..99a8eb8 100644
+--- a/arch/mips/boot/compressed/uart-16550.c
++++ b/arch/mips/boot/compressed/uart-16550.c
+@@ -13,6 +13,11 @@
+ #define PORT(offset) (CKSEG1ADDR(UART_BASE) + (offset))
+ #endif
+ 
++#if defined(CONFIG_MACH_LOONGSON32)
++#define UART_BASE 0x1fe40000
++#define PORT(offset) (CKSEG1ADDR(UART_BASE) + (offset))
++#endif
++
+ #ifdef CONFIG_AR7
+ #include <ar7.h>
+ #define PORT(offset) (CKSEG1ADDR(AR7_REGS_UART0) + (4 * offset))
+-- 
+2.7.4
+

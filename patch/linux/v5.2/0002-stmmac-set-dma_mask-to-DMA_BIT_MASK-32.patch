@@ -1,0 +1,28 @@
+From b53789eccfe5819b0b5324cac4ef197c6c85a227 Mon Sep 17 00:00:00 2001
+From: Wu Zhangjin <wuzhangjin@gmail.com>
+Date: Fri, 19 Jul 2019 02:21:32 -0700
+Subject: [PATCH 2/2] stmmac: set dma_mask to DMA_BIT_MASK(32)
+
+Change-Id: I86a25739e1de9f56bae23911487a141017c000a2
+Signed-off-by: Huang Pei <huangpei@loongson.cn>
+Signed-off-by: Wu Zhangjin <wuzhangjin@gmail.com>
+---
+ drivers/net/ethernet/stmicro/stmmac/stmmac_main.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+index 06358fe..df10c29 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
++++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+@@ -4306,6 +4306,8 @@ int stmmac_dvr_probe(struct device *device,
+ 
+ 	ndev->netdev_ops = &stmmac_netdev_ops;
+ 
++	dma_coerce_mask_and_coherent(device, DMA_BIT_MASK(32));
++
+ 	ndev->hw_features = NETIF_F_SG | NETIF_F_IP_CSUM | NETIF_F_IPV6_CSUM |
+ 			    NETIF_F_RXCSUM;
+ 
+-- 
+2.7.4
+
