@@ -1,5 +1,5 @@
 
-# qemu loongson/ls1b board bsp
+# qemu mipsel/ls1b board bsp
 
 This is for [Linux Lab](https://tinylab.org/linux-lab).
 
@@ -14,5 +14,5 @@ This is for [Linux Lab](https://tinylab.org/linux-lab).
 ## Use it in Linux Lab
 
     $ cd /path/to/linux-lab
-    $ make B=loongson/ls1b
+    $ make B=mipsel/ls1b
     $ make boot
