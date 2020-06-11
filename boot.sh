@@ -1,6 +1,6 @@
 #!/bin/bash
 
-QVER=v3.0.0-rc2
+QVER=loongson-v1.0
 KVER=v5.2
 RVER=2016.05
 
